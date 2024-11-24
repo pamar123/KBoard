@@ -1,3 +1,24 @@
+services:
+  - type: web
+    name: kboard
+    env: node
+    buildCommand: npm run render-build
+    startCommand: npm run render-start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: DB_URL
+        fromDatabase:
+          name: kboard_db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+
+databases:
+  - name: kboard_db
+    databaseName: kboard_db
+    user: kboard_user
+    plan: free
 
 
 services:
